@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 10:54:28 by jgotz             #+#    #+#             */
-/*   Updated: 2023/10/06 10:57:16 by jgotz            ###   ########.fr       */
+/*   Updated: 2023/10/06 16:10:55 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,56 +28,50 @@ int	ft_pow(int base, int exponent)
 	return (base * ft_pow(base, exponent - 1));
 }
 
-#include <stdio.h>
-
 /* if base is 10 and the value is negative there should be a
 	- in front of the string. Otherwise it's unsigned */
-char	*ft_itoa(int value, char *str, int base)
+
+/*
+@TODO case mit max neg Zahl abfangen
+kürzen
+ */
+char	*ft_itoa(int value)
 {
-	int	exponent;
-	int	i;
+	int		exponent;
+	int		i;
+	char	*str;
 
 	exponent = 0;
 	i = 0;
-	while (ft_pow(base, exponent) < value)
+	if (value < 0)
+	{
+		value *= -1;
+		i++;
+	}
+	while (ft_pow(10, exponent) <= value)
 		exponent++;
 	exponent--;
+	str = (char *)ft_calloc(exponent + 1, sizeof(char));
+	if (!str)
+		return (NULL);
+	if (i > 0)
+		str[0] = '-';
 	while (exponent >= 0)
 	{
-		if ((value / ft_pow(base, exponent)) < 10)
-			str[i] = '0' + (value / ft_pow(base, exponent));
+		if ((value / ft_pow(10, exponent)) < 10)
+			str[i] = '0' + (value / ft_pow(10, exponent));
 		else
-			str[i] = 'a' - 10 + (value / ft_pow(base, exponent));
-		value -= ((value / ft_pow(base, exponent)) * ft_pow(base, exponent));
+			str[i] = 'a' - 10 + (value / ft_pow(10, exponent));
+		value -= ((value / ft_pow(10, exponent)) * ft_pow(10, exponent));
 		exponent--;
+		i++;
 	}
 	return (str);
 }
 
+#include <stdio.h>
+
 int	main(void)
 {
-	int	number;
-
-	char str[32] = "";
-	number = 17;
-	printf("%s\n", ft_itoa(number, str, 16));
+	printf("%s\n", ft_itoa(-42));
 }
-
-/* 42d -> o
-
-42/8 5 > 0
-42/8^2 2 > 0
-42/8^3 0 < 0
-
-42/8^2 = 2
-42 - 8^2 * 2 = 26
-
-26/8^1 = 3
-26-(8^1*3) = 2
-
-2 / 8^0 = 2
-2 -(8^0 * 2) = 0 -> finish
-
-=> 220
-
- */
