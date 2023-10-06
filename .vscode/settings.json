@@ -1,9 +1,0 @@
-{
-	"files.associations": {
-		"libft.h": "c",
-		"bitset": "c",
-		"functional": "c",
-		"iterator": "c",
-		"memory": "c"
-	}
-}
