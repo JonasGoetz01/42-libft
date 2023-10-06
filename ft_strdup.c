@@ -6,8 +6,14 @@
 /*   By: jgotz <jgotz@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 10:54:28 by jgotz             #+#    #+#             */
-/*   Updated: 2023/10/05 11:29:25 by jgotz            ###   ########.fr       */
+/*   Updated: 2023/10/06 19:52:20 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <string.h>
+
+char	*ft_strdup(const char *s1)
+{
+	return (strdup(s1));
+}

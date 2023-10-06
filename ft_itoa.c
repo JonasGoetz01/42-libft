@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 10:54:28 by jgotz             #+#    #+#             */
-/*   Updated: 2023/10/06 17:50:08 by jgotz            ###   ########.fr       */
+/*   Updated: 2023/10/06 20:11:54 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,54 +15,73 @@
 
 int	ft_pow(int base, int exponent)
 {
-	if (exponent == 0)
-		return (1);
-	return (base * ft_pow(base, exponent - 1));
+	int	res;
+	int	i;
+
+	res = 1;
+	i = 0;
+	while (i < exponent)
+	{
+		res *= base;
+		i++;
+	}
+	return (res);
 }
 
-/* if base is 10 and the value is negative there should be a
-	- in front of the string. Otherwise it's unsigned */
+int	count_digits(long long value)
+{
+	int	count;
 
-/*
-@TODO case mit max neg Zahl abfangen
-kürzen
- */
+	count = 0;
+	if (value < 0)
+	{
+		value *= -1;
+		count++;
+	}
+	if (value == 0)
+	{
+		return (1);
+	}
+	while (value > 0)
+	{
+		value /= 10;
+		count++;
+	}
+	return (count);
+}
+
 char	*ft_itoa(int value)
 {
-	int		exponent;
-	int		i;
-	char	*str;
-	long	val;
+	int			exponent;
+	int			i;
+	char		*str;
+	long long	val;
+	char		digit;
 
-	val = (long)value;
-	exponent = 0;
+	val = (long long)value;
+	if (val == -2147483648)
+		return (ft_strdup("-2147483648"));
+	exponent = count_digits(val);
 	i = 0;
+	str = (char *)ft_calloc(exponent + 2, sizeof(char));
+	if (!str)
+		return (NULL);
 	if (val < 0)
 	{
+		str[0] = '-';
 		val *= -1;
 		i++;
 	}
-	while (ft_pow(10, exponent) <= val)
+	while (exponent > 0)
 	{
-		printf("%d\n", exponent);
-		exponent++;
-	}
-	exponent--;
-	str = (char *)ft_calloc(exponent + 1, sizeof(char));
-	if (!str)
-		return (NULL);
-	if (i > 0)
-		str[0] = '-';
-	while (exponent >= 0)
-	{
-		printf("t\n");
-		if ((val / ft_pow(10, exponent)) < 10)
-			str[i] = '0' + (val / ft_pow(10, exponent));
-		else
-			str[i] = 'a' - 10 + (val / ft_pow(10, exponent));
-		val -= ((val / ft_pow(10, exponent)) * ft_pow(10, exponent));
 		exponent--;
-		i++;
+		digit = '0' + (val / ft_pow(10, exponent));
+		if (!(digit == '0' && i == 1 && str[0] == '-'))
+		{
+			str[i] = digit;
+			i++;
+		}
+		val %= ft_pow(10, exponent);
 	}
 	return (str);
 }
@@ -71,5 +90,12 @@ char	*ft_itoa(int value)
 
 int	main(void)
 {
-	printf("%s\n", ft_itoa(-2147483647));
+	printf("%s\n", ft_itoa(-2147483648));
+	printf("%s\n", ft_itoa(2147483647));
+	printf("%s\n", ft_itoa(-42));
+	printf("%s\n", ft_itoa(42));
+	printf("%s\n", ft_itoa(0));
+	printf("%s\n", ft_itoa(-0));
+	printf("%s\n", ft_itoa(1));
+	printf("%s\n", ft_itoa(-1));
 }
