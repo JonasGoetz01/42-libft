@@ -6,89 +6,64 @@
 /*   By: jgotz <jgotz@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 10:54:28 by jgotz             #+#    #+#             */
-/*   Updated: 2023/10/06 20:11:54 by jgotz            ###   ########.fr       */
+/*   Updated: 2023/10/07 16:36:51 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
 
-int	ft_pow(int base, int exponent)
+int	ft_abs(int n)
 {
-	int	res;
-	int	i;
+	if (n < 0)
+		return (n * -1);
+	else
+		return (n);
+}
 
-	res = 1;
+void	ft_strrev(char *str)
+{
+	size_t	length;
+	size_t	i;
+	char	tmp;
+
+	length = ft_strlen(str);
 	i = 0;
-	while (i < exponent)
+	while (i < length / 2)
 	{
-		res *= base;
+		tmp = str[i];
+		str[i] = str[length - i - 1];
+		str[length - i - 1] = tmp;
 		i++;
 	}
-	return (res);
 }
 
-int	count_digits(long long value)
+char	*ft_itoa(int n)
 {
-	int	count;
+	char	*str;
+	int		neg;
+	size_t	length;
 
-	count = 0;
-	if (value < 0)
-	{
-		value *= -1;
-		count++;
-	}
-	if (value == 0)
-	{
-		return (1);
-	}
-	while (value > 0)
-	{
-		value /= 10;
-		count++;
-	}
-	return (count);
-}
-
-char	*ft_itoa(int value)
-{
-	int			exponent;
-	int			i;
-	char		*str;
-	long long	val;
-	char		digit;
-
-	val = (long long)value;
-	if (val == -2147483648)
-		return (ft_strdup("-2147483648"));
-	exponent = count_digits(val);
-	i = 0;
-	str = (char *)ft_calloc(exponent + 2, sizeof(char));
-	if (!str)
+	neg = (n < 0);
+	if (!(str = ft_calloc(11 + neg, sizeof(*str))))
 		return (NULL);
-	if (val < 0)
+	if (n == 0)
+		str[0] = '0';
+	length = 0;
+	while (n != 0)
 	{
-		str[0] = '-';
-		val *= -1;
-		i++;
+		str[length++] = '0' + ft_abs(n % 10);
+		n = (n / 10);
 	}
-	while (exponent > 0)
-	{
-		exponent--;
-		digit = '0' + (val / ft_pow(10, exponent));
-		if (!(digit == '0' && i == 1 && str[0] == '-'))
-		{
-			str[i] = digit;
-			i++;
-		}
-		val %= ft_pow(10, exponent);
-	}
+	if (neg)
+		str[length] = '-';
+	ft_strrev(str);
 	return (str);
 }
 
 #include <stdio.h>
 
-int	main(void)
+/* int	main(void)
 {
 	printf("%s\n", ft_itoa(-2147483648));
 	printf("%s\n", ft_itoa(2147483647));
@@ -98,4 +73,4 @@ int	main(void)
 	printf("%s\n", ft_itoa(-0));
 	printf("%s\n", ft_itoa(1));
 	printf("%s\n", ft_itoa(-1));
-}
+} */

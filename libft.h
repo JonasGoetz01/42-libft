@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 11:40:40 by jgotz             #+#    #+#             */
-/*   Updated: 2023/10/06 19:53:15 by jgotz            ###   ########.fr       */
+/*   Updated: 2023/10/07 16:58:16 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@ int		ft_toupper(int c);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_itoa(int value);
 char	*ft_strdup(const char *s1);
+void	*ft_memchr(const void *str, int c, size_t n);
+int		ft_memcmp(const void *str1, const void *str2, size_t n);
+void	*ft_memcpy(void *dest, const void *src, size_t n);
+void	*ft_memmove(void *dest, const void *src, size_t length);
 
 #endif
 
