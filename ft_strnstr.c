@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 10:54:28 by jgotz             #+#    #+#             */
-/*   Updated: 2023/10/09 00:56:28 by jgotz            ###   ########.fr       */
+/*   Updated: 2023/10/09 14:15:17 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*ft_strnstr(const char *str, const char *to_find, size_t len)
 		}
 		if (*t == '\0')
 		{
-			if (len - ft_strlen(t) >= 0)
+			if (ft_strlen(to_find) <= len)
 				return ((char *)str);
 		}
 		str++;

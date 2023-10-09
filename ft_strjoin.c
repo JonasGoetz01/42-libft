@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 10:54:28 by jgotz             #+#    #+#             */
-/*   Updated: 2023/10/09 09:45:08 by jgotz            ###   ########.fr       */
+/*   Updated: 2023/10/09 10:46:44 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*ft_strjoin(const char *s1, const char *s2)
 {
-	char *ret;
-	size_t len;
+	char	*ret;
+	size_t	len;
 
 	if (!s1 || !s2)
 		return (NULL);

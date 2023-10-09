@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 10:54:28 by jgotz             #+#    #+#             */
-/*   Updated: 2023/10/06 09:55:04 by jgotz            ###   ########.fr       */
+/*   Updated: 2023/10/09 11:24:00 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ void	*ft_calloc(size_t count, size_t size)
 
 	p = (void *)malloc(count * size);
 	if (!p)
-	{
-		free(p);
 		return (NULL);
-	}
 	ft_bzero(p, count * size);
 	return (p);
 }

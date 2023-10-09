@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 10:54:28 by jgotz             #+#    #+#             */
-/*   Updated: 2023/10/09 00:42:31 by jgotz            ###   ########.fr       */
+/*   Updated: 2023/10/09 10:48:05 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ char	*ft_itoa(int n)
 	size_t	length;
 
 	neg = (n < 0);
-	if (!(str = ft_calloc(11 + neg, sizeof(*str))))
+	str = ft_calloc(11 + neg, sizeof(*str));
+	if (!str)
 		return (NULL);
 	if (n == 0)
 		str[0] = '0';
@@ -61,9 +62,9 @@ char	*ft_itoa(int n)
 	return (str);
 }
 
-#include <stdio.h>
+/* #include <stdio.h>
 
-/* int	main(void)
+int	main(void)
 {
 	printf("%s\n", ft_itoa(-2147483648));
 	printf("%s\n", ft_itoa(2147483647));
