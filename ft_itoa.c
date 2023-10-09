@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 10:54:28 by jgotz             #+#    #+#             */
-/*   Updated: 2023/10/09 10:48:05 by jgotz            ###   ########.fr       */
+/*   Updated: 2023/10/09 23:44:33 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,23 @@ void	ft_strrev(char *str)
 	}
 }
 
+int	get_num_digits(int n)
+{
+	int	i;
+	int	number;
+
+	i = 0;
+	number = ft_abs(n);
+	if (number == 0)
+		return (1);
+	while (number > 0)
+	{
+		number /= 10;
+		i++;
+	}
+	return (i);
+}
+
 char	*ft_itoa(int n)
 {
 	char	*str;
@@ -45,7 +62,15 @@ char	*ft_itoa(int n)
 	size_t	length;
 
 	neg = (n < 0);
-	str = ft_calloc(11 + neg, sizeof(*str));
+	if (n == -2147483648)
+	{
+		str = ft_calloc(12, sizeof(*str));
+		if (!str)
+			return (NULL);
+		ft_strlcpy(str, "-2147483648", 12);
+		return (str);
+	}
+	str = ft_calloc(get_num_digits(n) + 1 + neg, sizeof(*str));
 	if (!str)
 		return (NULL);
 	if (n == 0)
@@ -59,6 +84,7 @@ char	*ft_itoa(int n)
 	if (neg)
 		str[length] = '-';
 	ft_strrev(str);
+	str[length + 1] = '\0';
 	return (str);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 10:54:28 by jgotz             #+#    #+#             */
-/*   Updated: 2023/10/09 16:56:25 by jgotz            ###   ########.fr       */
+/*   Updated: 2023/10/09 23:26:23 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,34 @@
 static int	count_words(const char *s, char c)
 {
 	int	count;
+	int	in_word;
 
 	count = 0;
+	in_word = 0;
 	while (*s)
 	{
-		while (*s == c)
-			s++;
-		if (*s)
+		if (*s == c)
+			in_word = 0;
+		else if (!in_word)
+		{
+			in_word = 1;
 			count++;
-		while (*s && *s != c)
-			s++;
+		}
+		s++;
 	}
 	return (count);
 }
 
-void	*add_to_result(char **result, int word_len, int i, const char *s)
+int	check_res(char **result, int i)
 {
-	result[i] = ft_substr(s - word_len, 0, word_len);
 	if (!result[i])
 	{
-		while (i >= 0)
-			free(result[i--]);
+		while (--i >= 0)
+			free(result[i]);
 		free(result);
-		return (NULL);
+		return (0);
 	}
-	return (0);
+	return (1);
 }
 
 char	**ft_split(const char *s, char c)
@@ -59,19 +62,18 @@ char	**ft_split(const char *s, char c)
 		while (*s && *s == c)
 			s++;
 		word_len = 0;
-		while (*s && *s != c)
-		{
+		while (s[word_len] && s[word_len] != c)
 			word_len++;
-			s++;
-		}
-		if (add_to_result(result, word_len, i, s) == NULL)
+		result[i] = ft_substr(s, 0, word_len);
+		if (check_res(result, i) == 0)
 			return (NULL);
+		s += word_len;
 		i++;
 	}
 	return (result);
 }
 
-#include <stdio.h>
+/* #include <stdio.h>
 
 int	main(void)
 {
@@ -82,10 +84,9 @@ int	main(void)
 	i = 0;
 	str = "Hello world!";
 	strs = ft_split(str, ' ');
-	printf("ff");
 	while (i < 2)
 	{
 		printf("%s\n", strs[i]);
 		i++;
 	}
-}
+} */
