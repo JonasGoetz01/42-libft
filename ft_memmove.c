@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 10:54:28 by jgotz             #+#    #+#             */
-/*   Updated: 2023/10/08 12:58:07 by jgotz            ###   ########.fr       */
+/*   Updated: 2023/10/10 09:25:41 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	*ft_memmove(void *dest, const void *src, size_t length)
 	char	*d;
 	char	*s;
 
-	if (!dest || !src)
-		return (NULL);
 	d = (char *)dest;
 	s = (char *)src;
+	if (!s && !d)
+		return (NULL);
 	if (s < d)
 	{
 		s += length;

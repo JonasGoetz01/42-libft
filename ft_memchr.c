@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 10:54:28 by jgotz             #+#    #+#             */
-/*   Updated: 2023/10/09 13:16:10 by jgotz            ###   ########.fr       */
+/*   Updated: 2023/10/10 09:22:21 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ void	*ft_memchr(const void *str, int c, size_t n)
 
 	i = 0;
 	s = (char *)str;
-	if (!str)
-		return (NULL);
 	while (i < n)
 	{
 		if (s[i] == (char)c)

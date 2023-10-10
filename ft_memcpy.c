@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 10:54:28 by jgotz             #+#    #+#             */
-/*   Updated: 2023/10/09 10:46:17 by jgotz            ###   ########.fr       */
+/*   Updated: 2023/10/10 09:25:24 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	char	*s;
 	char	*d;
 
-	if (!dest)
-		return (NULL);
 	s = (char *)src;
 	d = (char *)dest;
+	if (!s && !d)
+		return (NULL);
 	i = 0;
 	while (i < n)
 	{

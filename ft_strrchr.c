@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 10:54:28 by jgotz             #+#    #+#             */
-/*   Updated: 2023/10/09 10:50:23 by jgotz            ###   ########.fr       */
+/*   Updated: 2023/10/10 09:46:39 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_strrchr(const char *str, int c)
 			last_match = (char *)str;
 		str++;
 	}
-	if (!c)
+	if ((char)c == '\0')
 	{
 		last_match = (char *)str;
 	}
