@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 10:54:28 by jgotz             #+#    #+#             */
-/*   Updated: 2023/10/09 16:17:27 by jgotz            ###   ########.fr       */
+/*   Updated: 2023/10/10 08:54:07 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ size_t	get_trimmed_str_len(const char *s1, const char *set)
 		i++;
 	}
 	i = 0;
-	while (i < ft_strlen(set) && (ft_strchr(set, s1[ft_strlen(s1) - 1
-				- i]) != NULL))
+	while ((i < ft_strlen(set)) && (ft_strchr(set, s1[ft_strlen(s1) - 1
+					- i]) != NULL))
 	{
 		trimmed_len--;
 		i++;
