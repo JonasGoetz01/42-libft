@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 10:54:28 by jgotz             #+#    #+#             */
-/*   Updated: 2023/10/09 23:44:33 by jgotz            ###   ########.fr       */
+/*   Updated: 2023/10/10 08:49:57 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,27 @@ int	get_num_digits(int n)
 	return (i);
 }
 
+void	gen_str(int n, char *str, size_t *len)
+{
+	if (n == 0)
+	{
+		str[0] = '0';
+		str[1] = '\0';
+	}
+	while (n != 0)
+	{
+		str[(*len)++] = '0' + ft_abs(n % 10);
+		n = (n / 10);
+	}
+}
+
 char	*ft_itoa(int n)
 {
 	char	*str;
 	int		neg;
-	size_t	length;
+	size_t	len;
 
+	len = 0;
 	neg = (n < 0);
 	if (n == -2147483648)
 	{
@@ -70,21 +85,14 @@ char	*ft_itoa(int n)
 		ft_strlcpy(str, "-2147483648", 12);
 		return (str);
 	}
-	str = ft_calloc(get_num_digits(n) + 1 + neg, sizeof(*str));
+	str = ft_calloc(get_num_digits(n) + 2 - (n == 0), sizeof(*str));
 	if (!str)
 		return (NULL);
-	if (n == 0)
-		str[0] = '0';
-	length = 0;
-	while (n != 0)
-	{
-		str[length++] = '0' + ft_abs(n % 10);
-		n = (n / 10);
-	}
+	gen_str(n, str, &len);
 	if (neg)
-		str[length] = '-';
+		str[len] = '-';
 	ft_strrev(str);
-	str[length + 1] = '\0';
+	str[len + 1] = '\0';
 	return (str);
 }
 
